@@ -105,6 +105,32 @@
     <footer>
         <p>&copy; 2024 Riize. All rights reserved.</p>
     </footer>
+<!-- 引入艺爪前端SDK（CDN，不用下载） -->
+<script src="https://cdn.jsdelivr.net/npm/ezrevenue-browser@latest/dist/ui.min.js"></script>
+<script>
+// 1. 初始化（替换成你的参数）
+const ez = new Ezrevenue({
+  projectId: "你的Project ID",
+  projectSecret: "你的API Key（Secret）",
+  paywallAlias: "paywall_vip" // 艺爪后台建的付费墙别名
+});
 
+// 2. 点击按钮触发付费
+document.getElementById("unlock-btn").addEventListener("click", async () => {
+  try {
+    // 打开付费弹窗
+    const result = await ez.openPaywall();
+    if (result.success) {
+      alert("付费成功！解锁MBTI结果");
+      // 这里写你解锁内容的代码
+    }
+  } catch (err) {
+    console.error("付费失败", err);
+  }
+});
+</script>
+
+<!-- 3. 加解锁按钮 -->
+<button id="unlock-btn">解锁完整MBTI结果</button>
 </body>
 </html>
